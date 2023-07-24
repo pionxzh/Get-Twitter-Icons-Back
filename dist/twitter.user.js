@@ -3,7 +3,7 @@
 // @namespace    Pionxzh
 // @version      1.1.0
 // @author       Pionxzh
-// @description  Restore the old icon on Twitter
+// @description  Brings back the blue bird icon on Twitter. No more 𝕏.
 // @license      MIT
 // @icon         https://abs.twimg.com/favicons/twitter.2.ico
 // @match        https://twitter.com/*

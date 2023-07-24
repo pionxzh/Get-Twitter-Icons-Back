@@ -4,7 +4,7 @@
   "version": "1.1.0",
   "private": true,
   "title": "Get Twitter Icons Back",
-  "description": "Restore the old icon on Twitter",
+  "description": "Brings back the blue bird icon on Twitter. No more 𝕏.",
   "author": "Pionxzh",
   "license": "MIT",
   "scripts": {
