@@ -49,6 +49,12 @@ function injectStyle() {
     -webkit-user-select: none;
     user-select: none;
     display: inline-block;
+}
+
+@media (prefers-color-scheme: dark) {
+    .old-twitter-icon {
+        color: rgba(231,233,234,1.00);
+    }
 }`)
     document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
 }
