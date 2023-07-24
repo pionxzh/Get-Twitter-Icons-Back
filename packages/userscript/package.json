@@ -1,0 +1,25 @@
+{
+  "name": "@pionxzh/twitter-icon-userscript",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "title": "Get Twitter Icons Back",
+  "description": "Restore the old icon on Twitter",
+  "author": "Pionxzh",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test:type": "tsc --noEmit",
+    "test": "pnpm run test:type",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "sentinel-js": "^0.0.5",
+    "vite-plugin-monkey": "^3.3.0"
+  },
+  "devDependencies": {
+    "vite": "^4.4.2"
+  }
+}
