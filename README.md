@@ -36,11 +36,3 @@
 [Install-1-url]: https://greasyfork.org/scripts/471595-get-twitter-icons-back
 [Install-2-image]: https://img.shields.io/badge/-Install-blue
 [Install-2-url]: https://raw.githubusercontent.com/pionxzh/Get-Twitter-Icons-Back/master/dist/twitter.user.js
-
-## ⭐ Star History
-
-<div align="center">
-
-<img src="https://api.star-history.com/svg?repos=pionxzh/Get-Twitter-Icons-Back&type=Date" width="600" height="400" alt="Star History Chart" valign="middle">
-
-</div>
