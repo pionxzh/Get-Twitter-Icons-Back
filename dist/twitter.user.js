@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Get Twitter Icons Back
 // @namespace    Pionxzh
-// @version      1.2.0
+// @version      1.3.0
 // @author       Pionxzh
 // @description  Brings back the blue bird icon on Twitter. No more 𝕏.
 // @license      MIT
@@ -123,7 +123,8 @@
     }
   }
   main();
-  const twitterIconSvg = '<svg data-replaced="true" viewBox="0 0 24 24" aria-hidden="true" class="r-k200y r-1cvl2hr r-4qtqp9 r-yyyyoo r-eu3ka r-dnmrzs r-bnwqim r-1plcrui r-lrvibr old-twitter-icon"><g><path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path></g></svg>';
+  const xIconSvgInner = '<g><path d="M14.258 10.152L23.176 0h-2.113l-7.747 8.813L7.133 0H0l9.352 13.328L0 23.973h2.113l8.176-9.309 6.531 9.309h7.133zm-2.895 3.293l-.949-1.328L2.875 1.56h3.246l6.086 8.523.945 1.328 7.91 11.078h-3.246zm0 0"></path></g>';
+  const twitterIconSvgInner = '<g><path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z"></path></g>';
   const linkMap = {
     "mask-icon": "https://abs.twimg.com/responsive-web/client-web/icon-svg.168b89da.svg",
     "shortcut icon": "//abs.twimg.com/favicons/twitter.2.ico",
@@ -136,11 +137,18 @@
     onloadSafe(() => {
       injectStyle();
       const placeHolderIconSelector = "#placeholder > svg";
-      replaceIcon(placeHolderIconSelector);
+      replaceIcon(placeHolderIconSelector, false);
       const headerIconSelector = "h1 a[href='/home'] svg";
-      replaceIcon(headerIconSelector);
+      replaceIcon(headerIconSelector, true);
       const mobileHeaderIconSelector = '[data-testid="TopNavBar"] svg';
-      replaceIcon(mobileHeaderIconSelector);
+      replaceIcon(mobileHeaderIconSelector, true);
+      sentinel.on("svg", (svg) => {
+        if (svg.getAttribute("data-replaced") === "true")
+          return;
+        svg.setAttribute("data-replaced", "true");
+        if (svg.innerHTML === xIconSvgInner)
+          svg.innerHTML = twitterIconSvgInner;
+      });
       replaceLinkRel();
       replaceMetaName();
     });
@@ -174,11 +182,14 @@
 }`);
     document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
   }
-  function replaceIcon(selector) {
+  function replaceIcon(selector, applyStyle) {
     sentinel.on(selector, (svg) => {
-      if (svg.getAttribute("data-replaced") !== "true") {
-        svg.innerHTML = twitterIconSvg;
-      }
+      if (svg.getAttribute("data-replaced") === "true")
+        return;
+      svg.setAttribute("data-replaced", "true");
+      svg.innerHTML = twitterIconSvgInner;
+      if (applyStyle)
+        svg.classList.add("old-twitter-icon");
     });
   }
   function replaceLinkRel() {
