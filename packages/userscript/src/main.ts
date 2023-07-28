@@ -124,9 +124,27 @@ function replaceMetaName() {
     })
 }
 
-function replaceTitle() {
-    const title = document.querySelector<HTMLTitleElement>('title')
-    if (!title) return
+async function waitForTitle(): Promise<HTMLTitleElement> {
+    return new Promise((resolve) => {
+        const title = document.querySelector<HTMLTitleElement>('title')
+        if (title) {
+            resolve(title)
+        }
+        else {
+            const observer = new MutationObserver(() => {
+                const title = document.querySelector<HTMLTitleElement>('title')
+                if (title) {
+                    observer.disconnect()
+                    resolve(title)
+                }
+            })
+            observer.observe(document.head, { childList: true })
+        }
+    })
+}
+
+async function replaceTitle() {
+    const el = await waitForTitle()
     const sync = () => {
         if (document.title.endsWith(' / X')) {
             document.title = `${document.title.slice(0, -1)}Twitter`
@@ -134,7 +152,7 @@ function replaceTitle() {
     }
     sync()
     window.addEventListener('visibilitychange', sync)
-    new MutationObserver(sync).observe(title, mutationObserverOptions)
+    new MutationObserver(sync).observe(el, mutationObserverOptions)
 }
 
 main()
