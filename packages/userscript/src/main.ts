@@ -101,6 +101,7 @@ function replaceLinkRel() {
                 }
             }
             sync()
+            window.addEventListener('visibilitychange', sync)
             new MutationObserver(sync).observe(link, mutationObserverOptions)
         }
     })
@@ -118,6 +119,7 @@ function replaceMetaName() {
                 }
             }
             sync()
+            window.addEventListener('visibilitychange', sync)
             new MutationObserver(sync).observe(meta, mutationObserverOptions)
         }
     })
