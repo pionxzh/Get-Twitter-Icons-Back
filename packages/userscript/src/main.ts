@@ -42,6 +42,7 @@ function main() {
 
         replaceLinkRel()
         replaceMetaName()
+        replaceTitle()
     })
 }
 
@@ -121,6 +122,19 @@ function replaceMetaName() {
             new MutationObserver(sync).observe(meta, mutationObserverOptions)
         }
     })
+}
+
+function replaceTitle() {
+    const title = document.querySelector<HTMLTitleElement>('title')
+    if (!title) return
+    const sync = () => {
+        if (document.title.endsWith(' / X')) {
+            document.title = `${document.title.slice(0, -1)}Twitter`
+        }
+    }
+    sync()
+    window.addEventListener('visibilitychange', sync)
+    new MutationObserver(sync).observe(title, mutationObserverOptions)
 }
 
 main()
