@@ -46,6 +46,26 @@ function main() {
     })
 }
 
+const syncColorScheme = () => {
+    const bgColor = document.body.style.backgroundColor
+    if (bgColor === '#FFFFFF' || bgColor === 'rgb(255, 255, 255)') {
+        document.documentElement.setAttribute('data-color-scheme', 'light')
+    }
+    else if (bgColor === '#000000' || bgColor === 'rgb(0, 0, 0)') {
+        document.documentElement.setAttribute('data-color-scheme', 'dark')
+    }
+    else if (bgColor === '#15202B' || bgColor === 'rgb(21, 32, 43)') {
+        document.documentElement.setAttribute('data-color-scheme', 'dim')
+    }
+    else {
+        const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-color-scheme', system)
+    }
+}
+syncColorScheme()
+const bodyStyleObserver = new MutationObserver(syncColorScheme)
+bodyStyleObserver.observe(document.body, { attributes: true })
+
 function injectStyle() {
     const sheet = new CSSStyleSheet()
     sheet.replaceSync(`
@@ -68,10 +88,9 @@ function injectStyle() {
     display: inline-block;
 }
 
-@media (prefers-color-scheme: dark) {
-    .old-twitter-icon {
-        color: rgba(231,233,234,1.00);
-    }
+[data-color-scheme="dim"] .old-twitter-icon,
+[data-color-scheme="dark"] .old-twitter-icon {
+    color: rgba(231,233,234,1.00);
 }`)
     document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
 }
