@@ -23,13 +23,13 @@ function main() {
         injectStyle()
 
         const placeHolderIconSelector = '#placeholder > svg'
-        replaceIcon(placeHolderIconSelector, false)
+        replaceIcon(placeHolderIconSelector, 'twitter-blue')
 
         const headerIconSelector = 'h1 a[href=\'/home\'] svg'
-        replaceIcon(headerIconSelector, true)
+        replaceIcon(headerIconSelector, 'old-twitter-icon')
 
         const mobileHeaderIconSelector = '[data-testid="TopNavBar"] svg'
-        replaceIcon(mobileHeaderIconSelector, true)
+        replaceIcon(mobileHeaderIconSelector, 'old-twitter-icon')
 
         // Fuzzy matching for all 𝕏 icons
         sentinel.on('svg', (svg) => {
@@ -74,7 +74,7 @@ function injectStyle() {
     width: 20px;
     max-width: 100%;
     fill: currentcolor;
-    color: rgba(29,155,240,1.00);
+    color: rgb(29,155,240);
     vertical-align: text-bottom;
     position: relative;
     -ms-flex-positive: 1;
@@ -88,20 +88,24 @@ function injectStyle() {
     display: inline-block;
 }
 
+.twitter-blue {
+    color: rgb(29,155,240);
+}
+
 [data-color-scheme="dim"] .old-twitter-icon,
 [data-color-scheme="dark"] .old-twitter-icon {
-    color: rgba(231,233,234,1.00);
+    color: rgb(231,233,234);
 }`)
     document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
 }
 
-function replaceIcon(selector: string, applyStyle: boolean) {
+function replaceIcon(selector: string, applyStyle?: string) {
     sentinel.on(selector, (svg) => {
         if (svg.getAttribute('data-replaced') === 'true') return
         svg.setAttribute('data-replaced', 'true')
 
         svg.innerHTML = twitterIconSvgInner
-        if (applyStyle) svg.classList.add('old-twitter-icon')
+        if (applyStyle) svg.classList.add(applyStyle)
     })
 }
 
