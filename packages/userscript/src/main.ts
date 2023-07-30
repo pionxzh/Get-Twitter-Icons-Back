@@ -25,8 +25,7 @@ function main() {
 
     waitForElement('head').then(() => {
         injectStyle()
-        monitorLinkRel()
-        monitorMetaName()
+        monitorHead()
         monitorTitle()
     })
 }
@@ -77,7 +76,7 @@ svg[data-testid="icon-verified"],
     document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
 }
 
-const mutationObserverOptions = { subtree: true, characterData: true, childList: true }
+const mutationObserverOptions: MutationObserverInit = { subtree: true, characterData: true, childList: true, attributes: true }
 
 async function waitForElement<T extends HTMLElement>(selector: string): Promise<T> {
     const el = document.querySelector<T>(selector)
@@ -95,40 +94,25 @@ async function waitForElement<T extends HTMLElement>(selector: string): Promise<
     })
 }
 
-function monitorLinkRel() {
-    const links = document.querySelectorAll<HTMLAnchorElement>('link[rel]')
-    links.forEach((link) => {
-        const rel = link.getAttribute('rel')
-        if (rel && linkMap[rel]) {
-            const targetValue = linkMap[rel]
-            const sync = () => {
-                if (link.getAttribute('href') !== targetValue) {
-                    link.setAttribute('href', targetValue)
-                }
+function monitorHead() {
+    const sync = () => {
+        Object.entries(linkMap).forEach(([rel, targetValue]) => {
+            const link = document.querySelector(`link[rel="${rel}"]`)
+            if (link && link.getAttribute('href') !== targetValue) {
+                link.setAttribute('href', targetValue)
             }
-            sync()
-            window.addEventListener('visibilitychange', sync)
-            new MutationObserver(sync).observe(link, mutationObserverOptions)
-        }
-    })
-}
+        })
 
-function monitorMetaName() {
-    const metaList = document.querySelectorAll<HTMLMetaElement>('meta[name]')
-    metaList.forEach((meta) => {
-        const name = meta.getAttribute('name')
-        if (name && metaMap[name]) {
-            const targetValue = metaMap[name]
-            const sync = () => {
-                if (meta.getAttribute('content') !== targetValue) {
-                    meta.setAttribute('content', targetValue)
-                }
+        Object.entries(metaMap).forEach(([name, targetValue]) => {
+            const meta = document.querySelector(`meta[name="${name}"]`)
+            if (meta && meta.getAttribute('content') !== targetValue) {
+                meta.setAttribute('content', targetValue)
             }
-            sync()
-            window.addEventListener('visibilitychange', sync)
-            new MutationObserver(sync).observe(meta, mutationObserverOptions)
-        }
-    })
+        })
+    }
+    sync()
+    window.addEventListener('visibilitychange', sync)
+    new MutationObserver(sync).observe(document.head, mutationObserverOptions)
 }
 
 async function monitorTitle() {
