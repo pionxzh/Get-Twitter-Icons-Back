@@ -15,6 +15,9 @@
 <align>This script brings back the old good <b>blue bird</b> icon on [Twitter](https://twitter.com/).</align>
 <br />
 
+<img src="https://github.com/pionxzh/Get-Twitter-Icons-Back/assets/9910706/d9375c17-d61a-4b27-8136-ada06b3d6414" alt="Feature Preview" width="600px">
+<br />
+
 ## Install
 
 ### Prerequisites
@@ -37,3 +40,12 @@
 [Install-1-url]: https://greasyfork.org/scripts/471595-get-twitter-icons-back
 [Install-2-image]: https://img.shields.io/badge/-Install-blue
 [Install-2-url]: https://raw.githubusercontent.com/pionxzh/Get-Twitter-Icons-Back/main/dist/twitter.user.js
+
+</div>
+
+## Features
+
+- Replace **all** 𝕏 icon with the Twitter icon
+- Restore favicon
+- Restore `meta` information
+- Restore title `/ Twitter`
