@@ -24,6 +24,7 @@ export default defineConfig({
                 match: [
                     'https://twitter.com/*',
                     'https://x.com/*',
+                    'https://tweetdeck.twitter.com/*',
                 ],
                 icon: 'https://abs.twimg.com/favicons/twitter.2.ico',
             },
