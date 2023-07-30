@@ -12,21 +12,22 @@ export default defineConfig({
         monkey({
             entry: 'src/main.ts',
             userscript: {
-                name: {
+                'name': {
                     '': packageJson.title,
                 },
-                author: packageJson.author,
-                namespace: packageJson.author,
-                description: {
+                'author': packageJson.author,
+                'namespace': packageJson.author,
+                'description': {
                     '': packageJson.description,
                 },
-                license: packageJson.license,
-                match: [
+                'license': packageJson.license,
+                'run-at': 'document-start',
+                'match': [
                     'https://twitter.com/*',
                     'https://x.com/*',
                     'https://tweetdeck.twitter.com/*',
                 ],
-                icon: 'https://abs.twimg.com/favicons/twitter.2.ico',
+                'icon': 'https://abs.twimg.com/favicons/twitter.2.ico',
             },
             build: {
                 fileName: 'twitter.user.js',
