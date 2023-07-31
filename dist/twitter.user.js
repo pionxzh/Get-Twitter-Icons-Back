@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Get Twitter Icons Back
 // @namespace    Pionxzh
-// @version      1.5.0
+// @version      1.6.0
 // @author       Pionxzh
 // @description  Brings back the blue bird icon on Twitter. No more 𝕏.
 // @license      MIT
@@ -22,20 +22,21 @@
   const twitterGray = "rgb(231,233,234)";
   const linkMap = {
     "mask-icon": "https://abs.twimg.com/responsive-web/client-web/icon-svg.168b89da.svg",
-    "shortcut icon": "//abs.twimg.com/favicons/twitter.2.ico",
+    // 'shortcut icon': '//abs.twimg.com/favicons/twitter.2.ico',
     "apple-touch-icon": "https://abs.twimg.com/responsive-web/client-web/icon-ios.b1fc727a.png"
   };
   const metaMap = {
     "apple-mobile-web-app-title": "Twitter"
   };
+  const twitterFavicon = "//abs.twimg.com/favicons/twitter.2.ico";
+  const twitterFaviconWithDot = "//abs.twimg.com/favicons/twitter-pip.2.ico";
   function main() {
     waitForElement("body").then(() => {
       doSyncColorScheme();
     });
     waitForElement("head").then(() => {
       injectStyle();
-      monitorLinkRel();
-      monitorMetaName();
+      monitorHead();
       monitorTitle();
     });
   }
@@ -78,7 +79,7 @@ svg[data-testid="icon-verified"],
 }`);
     document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet];
   }
-  const mutationObserverOptions = { subtree: true, characterData: true, childList: true };
+  const mutationObserverOptions = { subtree: true, characterData: true, childList: true, attributes: true };
   async function waitForElement(selector) {
     const el = document.querySelector(selector);
     if (el)
@@ -94,39 +95,32 @@ svg[data-testid="icon-verified"],
       requestAnimationFrame(fn);
     });
   }
-  function monitorLinkRel() {
-    const links = document.querySelectorAll("link[rel]");
-    links.forEach((link) => {
-      const rel = link.getAttribute("rel");
-      if (rel && linkMap[rel]) {
-        const targetValue = linkMap[rel];
-        const sync = () => {
-          if (link.getAttribute("href") !== targetValue) {
-            link.setAttribute("href", targetValue);
-          }
-        };
-        sync();
-        window.addEventListener("visibilitychange", sync);
-        new MutationObserver(sync).observe(link, mutationObserverOptions);
+  function monitorHead() {
+    const sync = () => {
+      Object.entries(linkMap).forEach(([rel, targetValue]) => {
+        const link = document.querySelector(`link[rel="${rel}"]`);
+        if (link && link.getAttribute("href") !== targetValue) {
+          link.setAttribute("href", targetValue);
+        }
+      });
+      Object.entries(metaMap).forEach(([name, targetValue]) => {
+        const meta = document.querySelector(`meta[name="${name}"]`);
+        if (meta && meta.getAttribute("content") !== targetValue) {
+          meta.setAttribute("content", targetValue);
+        }
+      });
+      const shortcut = document.querySelector('link[rel="shortcut icon"]');
+      if (shortcut) {
+        const hasNotification = document.querySelector('a[data-testid="AppTabBar_Notifications_Link"] svg ~ div[aria-live="polite"]');
+        const targetValue = hasNotification ? twitterFaviconWithDot : twitterFavicon;
+        if (shortcut.getAttribute("href") !== targetValue) {
+          shortcut.setAttribute("href", targetValue);
+        }
       }
-    });
-  }
-  function monitorMetaName() {
-    const metaList = document.querySelectorAll("meta[name]");
-    metaList.forEach((meta) => {
-      const name = meta.getAttribute("name");
-      if (name && metaMap[name]) {
-        const targetValue = metaMap[name];
-        const sync = () => {
-          if (meta.getAttribute("content") !== targetValue) {
-            meta.setAttribute("content", targetValue);
-          }
-        };
-        sync();
-        window.addEventListener("visibilitychange", sync);
-        new MutationObserver(sync).observe(meta, mutationObserverOptions);
-      }
-    });
+    };
+    sync();
+    window.addEventListener("visibilitychange", sync);
+    new MutationObserver(sync).observe(document.head, mutationObserverOptions);
   }
   async function monitorTitle() {
     const titleEl = await waitForElement("head > title");
