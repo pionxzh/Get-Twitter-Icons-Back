@@ -11,12 +11,15 @@ const twitterGray = 'rgb(231,233,234)'
 
 const linkMap: Record<string, string> = {
     'mask-icon': 'https://abs.twimg.com/responsive-web/client-web/icon-svg.168b89da.svg',
-    'shortcut icon': '//abs.twimg.com/favicons/twitter.2.ico',
+    // 'shortcut icon': '//abs.twimg.com/favicons/twitter.2.ico',
     'apple-touch-icon': 'https://abs.twimg.com/responsive-web/client-web/icon-ios.b1fc727a.png',
 }
 const metaMap: Record<string, string> = {
     'apple-mobile-web-app-title': 'Twitter',
 }
+
+const twitterFavicon = '//abs.twimg.com/favicons/twitter.2.ico'
+const twitterFaviconWithDot = '//abs.twimg.com/favicons/twitter-pip.2.ico'
 
 function main() {
     waitForElement('body').then(() => {
@@ -109,6 +112,15 @@ function monitorHead() {
                 meta.setAttribute('content', targetValue)
             }
         })
+
+        const shortcut = document.querySelector('link[rel="shortcut icon"]')
+        if (shortcut) {
+            const hasNotification = document.querySelector('a[data-testid="AppTabBar_Notifications_Link"] svg ~ div[aria-live="polite"]')
+            const targetValue = hasNotification ? twitterFaviconWithDot : twitterFavicon
+            if (shortcut.getAttribute('href') !== targetValue) {
+                shortcut.setAttribute('href', targetValue)
+            }
+        }
     }
     sync()
     window.addEventListener('visibilitychange', sync)
