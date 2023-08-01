@@ -1,9 +1,11 @@
 {
-  "name": "@pionxzh/twitter-icon",
+  "name": "@pionxzh/get-twitter-icons-back",
   "type": "module",
-  "version": "1.0.0",
+  "version": "1.6.1",
   "private": true,
-  "packageManager": "pnpm@8.6.6",
+  "packageManager": "pnpm@8.6.10",
+  "title": "Get Twitter Icons Back",
+  "description": "Brings back the blue bird icon on Twitter. No more 𝕏.",
   "author": "Pionxzh",
   "license": "MIT",
   "engines": {
@@ -15,32 +17,27 @@
     ]
   },
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "test": "turbo run test",
-    "lint": "turbo run lint",
-    "lint:fix": "turbo run lint:fix",
-    "clean": "rimraf ./dist",
-    "release:ci": "cpy packages/**/dist/*.user.js dist --flat",
+    "dev": "vite",
+    "build": "vite build",
+    "test:type": "tsc --noEmit",
+    "test": "pnpm run test:type",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "prepare": "husky install"
   },
+  "dependencies": {
+    "vite-plugin-monkey": "^3.3.1"
+  },
   "devDependencies": {
-    "@commitlint/cli": "^17.6.6",
-    "@commitlint/config-conventional": "^17.6.6",
+    "@commitlint/cli": "^17.6.7",
+    "@commitlint/config-conventional": "^17.6.7",
     "@pionxzh/eslint-config-react": "^0.5.1",
-    "@types/node": "^20.4.1",
-    "cpy-cli": "^5.0.0",
-    "eslint": "^8.44.0",
+    "@types/node": "^20.4.5",
+    "eslint": "^8.46.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.2.3",
-    "rimraf": "^5.0.1",
-    "turbo": "^1.10.7",
-    "typescript": "^5.1.6"
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "sentinel-js@0.0.5": "patches/sentinel-js@0.0.5.patch"
-    }
+    "typescript": "^5.1.6",
+    "vite": "^4.4.8"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "pnpm exec eslint"
