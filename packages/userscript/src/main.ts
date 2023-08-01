@@ -58,8 +58,8 @@ async function doSyncColorScheme() {
 }
 
 function injectStyle() {
-    const sheet = new CSSStyleSheet()
-    sheet.replaceSync(`
+    const style = document.createElement('style')
+    style.textContent = `
 svg > g > path[d='${xIconPath}'],
 svg > g > path[d='${xIconInNotificationPath}'] {
     d: path('${twitterIconPath}');
@@ -69,14 +69,14 @@ svg > g > path[d='${xIconInNotificationPath}'] {
 h1 a[href=\'/home\'] svg,
 svg[data-testid="icon-verified"],
 [data-testid="TopNavBar"] div:not([role="button"]) > div > svg,
-[data-testid="cellInnerDiv"] svg:has(g > path[d='${xIconInNotificationPath}']) {
+[data-testid="cellInnerDiv"] svg > g > path[d='${xIconInNotificationPath}'] {
     color: ${twitterBlue};
 }
 
 [data-color-scheme="dark"] h1 a[href=\'/home\'] svg {
     color: ${twitterGray};
-}`)
-    document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
+}`
+    document.head.appendChild(style)
 }
 
 const mutationObserverOptions: MutationObserverInit = { subtree: true, characterData: true, childList: true, attributes: true }
