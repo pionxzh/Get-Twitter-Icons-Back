@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.6.1",
   "private": true,
-  "packageManager": "pnpm@8.6.10",
+  "packageManager": "pnpm@8.8.0",
   "title": "Get Twitter Icons Back",
   "description": "Brings back the blue bird icon on Twitter. No more 𝕏.",
   "author": "Pionxzh",
@@ -26,18 +26,18 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "vite-plugin-monkey": "^3.3.1"
+    "vite-plugin-monkey": "^3.5.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.6.7",
-    "@commitlint/config-conventional": "^17.6.7",
-    "@pionxzh/eslint-config-react": "^0.5.1",
-    "@types/node": "^20.4.5",
-    "eslint": "^8.46.0",
+    "@commitlint/cli": "^17.7.2",
+    "@commitlint/config-conventional": "^17.7.0",
+    "@pionxzh/eslint-config-react": "^0.7.0",
+    "@types/node": "^20.8.4",
+    "eslint": "^8.51.0",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.3",
-    "typescript": "^5.1.6",
-    "vite": "^4.4.8"
+    "lint-staged": "^14.0.1",
+    "typescript": "^5.2.2",
+    "vite": "^4.4.11"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "pnpm exec eslint"
