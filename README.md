@@ -45,7 +45,8 @@
 
 ## Features
 
-- Replace **all** 𝕏 icon with the Twitter icon
+- Replace **all** 𝕏 icon with the Twitter Blue Bird icon
+- Replace home icon with the Twitter BirdHouse icon
 - Restore favicon
 - Restore `meta` information
 - Restore title `/ Twitter`
