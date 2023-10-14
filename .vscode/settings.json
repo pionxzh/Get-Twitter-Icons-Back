@@ -1,6 +1,6 @@
 {
   "editor.codeActionsOnSave": {
-    "source.fixAll": false,
+    "source.fixAll": "explicit",
     "source.fixAll.eslint": true, // this allows ESLint to auto fix on save
     "source.organizeImports": false
   },
@@ -44,6 +44,7 @@
     "dist/**": true
   },
   "cSpell.words": [
+    "favicons",
     "twimg"
   ]
 }
