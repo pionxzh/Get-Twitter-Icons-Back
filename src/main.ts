@@ -174,9 +174,19 @@ function monitorHead() {
 async function monitorTitle() {
     const titleEl = await waitForElement('head > title')
     const sync = () => {
-        if (document.title.endsWith(' / X')) {
-            document.title = `${document.title.slice(0, -1)}Twitter`
-        }
+        const newTitle = document.title
+            // Thread title
+            .replace(/ on X:/, ' on Twitter:')
+            // Thread title (zh-CN / zh-TW)
+            .replace(/X 上的/, 'Twitter 上的')
+            // X suffix
+            .replace(/ \/ X$/, ' / Twitter')
+            // Single X
+            .replace(/^X$/, 'Twitter')
+            // Single X with notification
+            .replace(/^\((\d+)\) X$/, '($1) Twitter')
+
+        if (newTitle !== document.title) document.title = newTitle
     }
     sync()
     window.addEventListener('visibilitychange', sync)
