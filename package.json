@@ -9,7 +9,7 @@
   "author": "Pionxzh",
   "license": "MIT",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=20.0.0"
   },
   "commitlint": {
     "extends": [
