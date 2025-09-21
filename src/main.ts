@@ -105,6 +105,14 @@ svg[data-testid="icon-verified"],
     color: ${twitterBlue};
 }
 
+a[data-testid="SideNav_NewTweet_Button"],
+button[data-testid="tweetButton"],
+button[data-testid="tweetButtonInline"],
+button[data-testid="confirmationSheetConfirm"],
+[data-testid="UserCell"] button[data-testid$="-follow"] {
+    background-color: ${twitterBlue}!important;
+}
+
 [data-color-scheme="dark"] h1 a[href=\'/home\'] svg {
     color: ${twitterGray};
 }
