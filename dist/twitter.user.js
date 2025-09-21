@@ -16,6 +16,7 @@
   'use strict';
 
   const xIconPath = "M14.258 10.152L23.176 0h-2.113l-7.747 8.813L7.133 0H0l9.352 13.328L0 23.973h2.113l8.176-9.309 6.531 9.309h7.133zm-2.895 3.293l-.949-1.328L2.875 1.56h3.246l6.086 8.523.945 1.328 7.91 11.078h-3.246zm0 0";
+  const xIconPath2 = "M21.742 21.75l-7.563-11.179 7.056-8.321h-2.456l-5.691 6.714-4.54-6.714H2.359l7.29 10.776L2.25 21.75h2.456l6.035-7.118 4.818 7.118h6.191-.008zM7.739 3.818L18.81 20.182h-2.447L5.29 3.818h2.447z";
   const xIconInNotificationPath = "M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z";
   const twitterBlueBirdIconPath = "M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z";
   const xHomeIconPath = "M11.54 2.345c.276-.194.644-.194.92 0l8 5.623c.213.15.34.394.34.655V21c0 .442-.358.8-.8.8h-5.855c-.442 0-.8-.358-.8-.8v-6.7h-2.69V21c0 .442-.359.8-.8.8H4c-.442 0-.8-.358-.8-.8V8.623c0-.26.127-.505.34-.655zM12 3.978l-7.2 5.06V20.2h4.255v-6.7c0-.442.358-.8.8-.8h4.29c.442 0 .8.358.8.8v6.7H19.2V9.038z";
@@ -69,6 +70,7 @@
     const style = document.createElement("style");
     style.textContent = `
 svg > g > path[d='${xIconPath}'],
+svg > g > path[d='${xIconPath2}'],
 svg > g > path[d='${xIconInNotificationPath}'] {
     d: path('${twitterBlueBirdIconPath}');
 }
@@ -93,6 +95,14 @@ svg[data-testid="icon-verified"],
 [data-testid="TopNavBar"] div:not([role="button"]) > div > svg,
 [data-testid="cellInnerDiv"] svg > g > path[d='${xIconInNotificationPath}'] {
     color: ${twitterBlue};
+}
+
+a[data-testid="SideNav_NewTweet_Button"],
+button[data-testid="tweetButton"],
+button[data-testid="tweetButtonInline"],
+button[data-testid="confirmationSheetConfirm"],
+[data-testid="UserCell"] button[data-testid$="-follow"] {
+    background-color: ${twitterBlue}!important;
 }
 
 [data-color-scheme="dark"] h1 a[href='/home'] svg {
