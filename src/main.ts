@@ -112,8 +112,8 @@ button[data-testid="tweetButtonInline"],
 button[data-testid="confirmationSheetConfirm"],
 [data-testid="UserCell"] button[data-testid$="-follow"],
 [data-testid="placementTracking"] button[data-testid$="-follow"] {
-    background-color: ${oldButtonStyle ? `transparent!important` : "inherit"};
-    border: ${oldButtonStyle ? `2px solid ${twitterBlue}!important` : "inherit"};
+    background-color: ${oldButtonStyle ? 'transparent!important' : 'rgb(215,219,220)'};
+    border: ${oldButtonStyle ? '2px solid ' + twitterBlue + '!important' : 'inherit'};
 }
 
 a[data-testid="SideNav_NewTweet_Button"] > div,
@@ -122,7 +122,7 @@ button[data-testid="tweetButtonInline"] > div,
 button[data-testid="confirmationSheetConfirm"] > div,
 [data-testid="UserCell"] button[data-testid$="-follow"] > div,
 [data-testid="placementTracking"] button[data-testid$="-follow"] > div {
-    color: ${oldButtonStyle ? `${twitterBlue}!important` : "inherit"};
+    color: ${oldButtonStyle ? twitterBlue + '!important' : 'inherit'};
 }
 
 [data-color-scheme="dark"] h1 a[href=\'/home\'] svg {
