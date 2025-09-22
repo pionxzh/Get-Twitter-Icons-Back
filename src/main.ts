@@ -25,6 +25,7 @@ const twitterBlueIconPath = 'M15.704 8.99c.457-.05.891-.17 1.296-.35-.302.45-.68
 
 const twitterBlue = 'rgb(29,155,240)'
 const twitterGray = 'rgb(231,233,234)'
+const oldButtonStyle = true
 
 const linkMap: Record<string, string> = {
     'mask-icon': 'https://abs.twimg.com/responsive-web/client-web/icon-svg.168b89da.svg',
@@ -109,8 +110,19 @@ a[data-testid="SideNav_NewTweet_Button"],
 button[data-testid="tweetButton"],
 button[data-testid="tweetButtonInline"],
 button[data-testid="confirmationSheetConfirm"],
-[data-testid="UserCell"] button[data-testid$="-follow"] {
-    background-color: ${twitterBlue}!important;
+[data-testid="UserCell"] button[data-testid$="-follow"],
+[data-testid="placementTracking"] button[data-testid$="-follow"] {
+    background-color: ${oldButtonStyle ? `transparent!important` : "inherit"};
+    border: ${oldButtonStyle ? `2px solid ${twitterBlue}!important` : "inherit"};
+}
+
+a[data-testid="SideNav_NewTweet_Button"] > div,
+button[data-testid="tweetButton"] > div,
+button[data-testid="tweetButtonInline"] > div,
+button[data-testid="confirmationSheetConfirm"] > div,
+[data-testid="UserCell"] button[data-testid$="-follow"] > div,
+[data-testid="placementTracking"] button[data-testid$="-follow"] > div {
+    color: ${oldButtonStyle ? `${twitterBlue}!important` : "inherit"};
 }
 
 [data-color-scheme="dark"] h1 a[href=\'/home\'] svg {
