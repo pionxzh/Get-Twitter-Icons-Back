@@ -1,2 +1,2 @@
 minimumReleaseAgeExclude:
-  - lint-staged@17.0.8
+    - lint-staged@17.0.8

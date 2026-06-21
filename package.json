@@ -1,45 +1,49 @@
 {
-  "name": "@pionxzh/get-twitter-icons-back",
-  "type": "module",
-  "version": "1.9.0",
-  "private": true,
-  "packageManager": "pnpm@11.8.0",
-  "title": "Get Twitter Icons Back",
-  "description": "Brings back the blue bird icon on Twitter. No more 𝕏.",
-  "author": "Pionxzh",
-  "license": "MIT",
-  "engines": {
-    "node": ">=20.0.0"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ]
-  },
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "test:type": "tsc --noEmit",
-    "test": "pnpm run test:type",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "prepare": "husky"
-  },
-  "dependencies": {
-    "vite-plugin-monkey": "^8.0.6"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "^21.0.2",
-    "@commitlint/config-conventional": "^21.0.2",
-    "@pionxzh/eslint-config": "^2.0.2",
-    "@types/node": "^26.0.0",
-    "eslint": "~9.19.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^17.0.8",
-    "typescript": "^6.0.3",
-    "vite": "^8.0.16"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "pnpm exec eslint"
-  }
+    "name": "@pionxzh/get-twitter-icons-back",
+    "version": "1.9.0",
+    "private": true,
+    "description": "Brings back the blue bird icon on Twitter. No more 𝕏.",
+    "license": "MIT",
+    "author": "Pionxzh",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "test:type": "tsc --noEmit",
+        "test": "pnpm run test:type",
+        "lint": "oxlint --ignore-pattern dist .",
+        "fmt": "oxfmt --write '!dist' .",
+        "fmt:check": "oxfmt --check '!dist' .",
+        "prepare": "husky"
+    },
+    "dependencies": {
+        "vite-plugin-monkey": "^8.0.6"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^21.0.2",
+        "@commitlint/config-conventional": "^21.0.2",
+        "@types/node": "^26.0.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^17.0.8",
+        "oxfmt": "^0.55.0",
+        "oxlint": "^1.70.0",
+        "typescript": "^6.0.3",
+        "vite": "^8.0.16"
+    },
+    "lint-staged": {
+        "*.{js,jsx,ts,tsx,mjs}": [
+            "pnpm exec oxlint",
+            "pnpm exec oxfmt --write"
+        ]
+    },
+    "commitlint": {
+        "extends": [
+            "@commitlint/config-conventional"
+        ]
+    },
+    "engines": {
+        "node": ">=20.0.0"
+    },
+    "packageManager": "pnpm@11.8.0",
+    "title": "Get Twitter Icons Back"
 }

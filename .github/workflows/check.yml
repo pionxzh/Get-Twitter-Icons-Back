@@ -1,38 +1,38 @@
 name: Check
 
 on:
-  push:
-    branches:
-      - '**'
-  pull_request:
-    branches:
-      - main
+    push:
+        branches:
+            - '**'
+    pull_request:
+        branches:
+            - main
 
 jobs:
-  check:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+    check:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
+            - name: Install pnpm
+              uses: pnpm/action-setup@v3
 
-      - name: Use Node.js v20
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          registry-url: https://registry.npmjs.org/
-          cache: pnpm
+            - name: Use Node.js v20
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+                  registry-url: https://registry.npmjs.org/
+                  cache: pnpm
 
-      - run: pnpm install
+            - run: pnpm install
 
-      - name: Build
-        run: pnpm run build
+            - name: Build
+              run: pnpm run build
 
-      - name: Lint
-        run: pnpm run lint
+            - name: Lint
+              run: pnpm run lint
 
-      - name: Test
-        run: pnpm run test
+            - name: Test
+              run: pnpm run test

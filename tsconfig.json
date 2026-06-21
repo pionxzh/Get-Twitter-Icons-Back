@@ -1,33 +1,26 @@
 {
-  "compilerOptions": {
-    "composite": true,
-    "target": "ESNext",
-    "lib": ["ESNext", "DOM"],
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
-    "resolveJsonModule": true,
-    "types": ["vite/client"],
-    "strict": true,
-    "strictNullChecks": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noEmit": true,
-    "outDir": "dist",
-    "sourceMap": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "skipLibCheck": true
-  },
-  "include": [
-    "src",
-    "package.json",
-    "vite.config.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+    "compilerOptions": {
+        "composite": true,
+        "target": "ESNext",
+        "lib": ["ESNext", "DOM"],
+        "useDefineForClassFields": true,
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "resolveJsonModule": true,
+        "types": ["vite/client"],
+        "strict": true,
+        "strictNullChecks": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noEmit": true,
+        "outDir": "dist",
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "isolatedModules": true,
+        "skipLibCheck": true
+    },
+    "include": ["src", "package.json", "vite.config.ts"],
+    "exclude": ["node_modules", "dist"]
 }
