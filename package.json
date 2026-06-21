@@ -42,7 +42,7 @@
         ]
     },
     "engines": {
-        "node": ">=20.0.0"
+        "node": ">=22.13.0"
     },
     "packageManager": "pnpm@11.8.0",
     "title": "Get Twitter Icons Back"
